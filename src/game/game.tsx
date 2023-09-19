@@ -27,7 +27,7 @@ export const Game = component$(() => {
     removedFlags.value += wantToRemove.value;
     wantToRemove.value = 0;
 
-    if (isOver(removedFlags.value)) {
+    if (isOver(21 - removedFlags.value)) {
       line.value = "GG! Will get you next time";
       return;
     }
@@ -42,7 +42,7 @@ export const Game = component$(() => {
       removedFlags.value += wantToRemove.value;
       wantToRemove.value = 0;
 
-      if (isOver(removedFlags.value)) {
+      if (isOver(21 - removedFlags.value)) {
         line.value = "Haha! You Lost!";
         return;
       }
