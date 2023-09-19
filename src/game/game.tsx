@@ -63,7 +63,7 @@ export const Game = component$(() => {
       <div class="btns">
         <button
           class="btn"
-          disabled={!wantToRemove.value}
+          disabled={!wantToRemove.value || turn.value === "computer"}
           onClick$={playUserMove}
         >
           Play
