@@ -1,5 +1,5 @@
 import { $, component$, useSignal, useTask$ } from "@builder.io/qwik";
-import { getAiMoveAndLine } from "~/scripts";
+import { getAiMoveAndLine, isOver } from "~/scripts";
 import { Board } from "./board";
 
 export type Turn = "player" | "computer";
@@ -27,6 +27,11 @@ export const Game = component$(() => {
     removedFlags.value += wantToRemove.value;
     wantToRemove.value = 0;
 
+    if (isOver(removedFlags.value)) {
+      line.value = "GG! Will get you next time";
+      return;
+    }
+
     turn.value = "computer";
     const ai = getAiMoveAndLine(21 - removedFlags.value);
 
@@ -36,6 +41,12 @@ export const Game = component$(() => {
     setTimeout(() => {
       removedFlags.value += wantToRemove.value;
       wantToRemove.value = 0;
+
+      if (isOver(removedFlags.value)) {
+        line.value = "Haha! You Lost!";
+        return;
+      }
+
       turn.value = "player";
     }, 1000);
   });
